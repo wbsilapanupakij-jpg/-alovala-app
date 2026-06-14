@@ -1,82 +1,50 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-  <title>ALÓVALA Payment Tracker</title>
-
-  <!-- PWA -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#7A4A2E">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="ALÓVALA">
-  <link rel="apple-touch-icon" href="icon-192.png">
-
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { 
-      width: 100%; height: 100%; overflow: hidden;
-      background: #FFF8F0;
-    }
-    iframe {
-      width: 100%; height: 100%; border: none;
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    }
-    #splash {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(135deg, #7A4A2E, #A0603D, #C8956C);
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
-      z-index: 9999; transition: opacity 0.5s ease;
-    }
-    #splash img { width: 150px; margin-bottom: 20px; }
-    #splash .text {
-      font-family: 'Segoe UI', sans-serif;
-      color: #E8C99B; font-size: 14px;
-      letter-spacing: 3px; opacity: 0.8;
-    }
-    #splash .loader {
-      width: 40px; height: 40px; margin-top: 30px;
-      border: 3px solid rgba(232,201,155,0.3);
-      border-top: 3px solid #E8C99B;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .hidden { opacity: 0; pointer-events: none; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>ALOVALA Payment Tracker</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<meta name="theme-color" content="#7A4A2E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ALOVALA">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#FFF8F0}
+#appFrame{width:100%;height:100%;border:none;position:fixed;top:0;left:0;right:0;bottom:0}
+#splash{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#7A4A2E,#A0603D,#C8956C);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999;transition:opacity 0.5s ease}
+#splashLogo{width:150px;height:150px;border-radius:30px;margin-bottom:20px;object-fit:cover}
+#splashText{font-family:'Segoe UI',sans-serif;color:#E8C99B;font-size:14px;letter-spacing:3px;opacity:0.8}
+#splashLoader{width:40px;height:40px;margin-top:30px;border:3px solid rgba(232,201,155,0.3);border-top:3px solid #E8C99B;border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hidden{opacity:0;pointer-events:none}
+</style>
 </head>
 <body>
 
-  <!-- Splash Screen -->
-  <div id="splash">
-    <img src="icon-192.png" alt="ALÓVALA">
-    <div class="text">PAYMENT TRACKER</div>
-    <div class="loader"></div>
-  </div>
+<div id="splash">
+<img id="splashLogo" src="icon-192.png" alt="ALOVALA">
+<div id="splashText">PAYMENT TRACKER</div>
+<div id="splashLoader"></div>
+</div>
 
-  <!-- Web App -->
-  <iframe id="app" src="https://script.google.com/macros/s/AKfycbwvyM4OLO6bsr5EqZ1d_AnH2fKYXCJJFAYOxFvf5jhqav9RHekcyo6ZqIpsb7F-dydiKA/exec" 
-          allow="camera;microphone" 
-          onload="hideSplash()">
-  </iframe>
+<iframe id="appFrame" src="https://script.google.com/macros/s/AKfycbwvyM4OLO6bsr5EqZ1d_AnH2fKYXCJJFAYOxFvf5jhqav9RHekcyo6ZqIpsb7F-dydiKA/exec" onload="hideSplash()"></iframe>
 
-  <script>
-    function hideSplash() {
-      setTimeout(function() {
-        document.getElementById('splash').classList.add('hidden');
-        setTimeout(function() {
-          document.getElementById('splash').style.display = 'none';
-        }, 600);
-      }, 800);
-    }
-
-    // Register Service Worker for PWA
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').catch(function(){});
-    }
-  </script>
+<script>
+function hideSplash(){
+  setTimeout(function(){
+    var s=document.getElementById('splash');
+    s.classList.add('hidden');
+    setTimeout(function(){s.style.display='none';},600);
+  },800);
+}
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+</script>
 </body>
 </html>
